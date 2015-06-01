@@ -72,4 +72,12 @@ object Functions {
       }
     res
   }
+
+  def mean(xs: Seq[Double]): MyOption[Double] = xs match {
+    case Nil => MyNone
+    case _ => MySome(xs.sum/xs.length)
+  }
+
+  def variance(xs: Seq[Double]): MyOption[Double] =
+    mean(xs).flatMap { x => mean(xs.map(y=> math.pow(y-x,2)))}
 }
